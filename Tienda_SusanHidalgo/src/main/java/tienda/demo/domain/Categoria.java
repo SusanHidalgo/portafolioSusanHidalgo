@@ -1,4 +1,4 @@
-package com.tienda.domain;
+package tienda.demo.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="categoria")
-public class categoria implements Serializable {
+public class Categoria implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
@@ -19,10 +19,10 @@ public class categoria implements Serializable {
     private String rutaImagen;
     private boolean activo;
 
-    public categoria() {
+    public Categoria() {
     }
 
-    public categoria(String categoria, boolean activo) {
+    public Categoria(String categoria, boolean activo) {
         this.descripcion = categoria;
         this.activo = activo;
     }
