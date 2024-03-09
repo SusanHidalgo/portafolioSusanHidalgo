@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@Slf4j
+@Slf4j 
 @RequestMapping("/categoria")
 public class CategoriaController {
     
     @Autowired
     private CategoriaService categoriaService;
 
-    @GetMapping("/listado") 
+    @GetMapping("/listado")
     public String inicio(Model model) {
         var categorias = categoriaService.getCategorias(false);
         model.addAttribute("categorias", categorias);
@@ -24,6 +24,4 @@ public class CategoriaController {
         return "/categoria/listado";
     }
     
-    
-
 }
