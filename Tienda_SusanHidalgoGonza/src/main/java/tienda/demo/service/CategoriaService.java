@@ -5,8 +5,8 @@ import tienda.demo.domain.Categoria;
 import java.util.List;
 
 public interface CategoriaService {
-    
-       public List<Categoria> getCategorias(boolean activo);
+
+    public List<Categoria> getCategorias(boolean activo);
 
     // Se obtiene un Categoria, a partir del id de un categoria
     public Categoria getCategoria(Categoria categoria);
