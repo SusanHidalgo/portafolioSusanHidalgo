@@ -1,5 +1,3 @@
-/* Comentario */
-
 tbody tr:nth-child(odd) {
     background-color: blue;
     color: white

@@ -1,4 +1,3 @@
-
 package tienda.demo.domain;
 
 import jakarta.persistence.Entity;
