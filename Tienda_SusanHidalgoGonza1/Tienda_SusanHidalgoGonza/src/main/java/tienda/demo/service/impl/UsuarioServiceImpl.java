@@ -54,26 +54,21 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarioDao.existsByUsernameOrCorreo(username, correo);
     }
 
-    @Override
+   @Override
     @Transactional
     public void save(Usuario usuario, boolean crearRolUser) {
         usuario=usuarioDao.save(usuario);
         if (crearRolUser) {  //Si se está creando el usuario, se crea el rol por defecto "USER"
             Rol rol = new Rol();
             rol.setNombre("ROLE_USER");
-            rol.setIdUsuario(usuario.getIdUsuario());
+            
+            rol.setIdUsuario(usuario.getIdUsuario().toString()); //Conversion Long to String
             rolDao.save(rol);
         }
     }
-
     @Override
     @Transactional
     public void delete(Usuario usuario) {
         usuarioDao.delete(usuario);
-    }
-
-    @Override
-    public Usuario getIdUsuario(String usuario, String Username) {
-        throw new UnsupportedOperationException("Not supported yet."); 
     }
 }
