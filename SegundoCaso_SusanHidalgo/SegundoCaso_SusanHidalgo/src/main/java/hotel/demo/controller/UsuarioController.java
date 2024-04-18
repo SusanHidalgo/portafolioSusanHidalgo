@@ -1,21 +1,20 @@
 package hotel.demo.controller;
 
-import hotel.demo.domain.Usuario;
-import hotel.demo.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import hotel.demo.domain.Usuario;
+import hotel.demo.service.UsuarioService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Controller
 @RequestMapping("/usuario")
 public class UsuarioController {
-
-    @Autowired
+    
+     @Autowired
     private UsuarioService usuarioService;
 
     @GetMapping("/listado")
@@ -31,14 +30,11 @@ public class UsuarioController {
         return "/usuario/modifica";
     }
 
-   
-
     @PostMapping("/guardar")
-    public String usuarioGuardar(Usuario usuario,
-            @RequestParam("imagenFile") MultipartFile imagenFile) {
-        if (!imagenFile.isEmpty()) {
-            usuarioService.save(usuario,false);}
-        usuarioService.save(usuario,true);
+    public String usuarioGuardar(Usuario usuario) {
+        var codigo = new BCryptPasswordEncoder();
+        usuario.setPassword(codigo.encode(usuario.getPassword()));
+        usuarioService.save2(usuario,1);
         return "redirect:/usuario/listado";
     }
 

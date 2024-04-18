@@ -1,27 +1,28 @@
 package hotel.demo.service.impl;
 
-import hotel.demo.dao.HotelesDao;
-import hotel.demo.dao.HotelesDao;
 import hotel.demo.domain.Hoteles;
-import hotel.demo.service.HotelesService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
+import hotel.demo.dao.HotelesDao;
+import hotel.demo.service.HotelesService;
+
 
 @Service
-public abstract class HotelesServiceImpl implements HotelesService {
-
+public class HotelesServiceImpl implements HotelesService {
     @Autowired
     private HotelesDao hotelDao;
-
-   
-    @Transactional(readOnly = true)
+    
+    
+    @Transactional(readOnly=true)
+    @Override
     public List<Hoteles> getHoteles() {
-        return hotelDao.findAll();
+        var lista=hotelDao.findAll();
+        return lista;
     }
 
-
+     @Override
     @Transactional(readOnly = true)
     public Hoteles getHotel(Hoteles hotel) {
         return hotelDao.findById(hotel.getId()).orElse(null);
