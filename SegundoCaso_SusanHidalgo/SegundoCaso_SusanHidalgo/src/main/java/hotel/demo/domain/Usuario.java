@@ -38,5 +38,9 @@ public class Usuario implements Serializable {
     @OneToMany
     @JoinColumn(name = "id_usuario")
     private List<Rol> roles;
+
+    public void setActivo(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

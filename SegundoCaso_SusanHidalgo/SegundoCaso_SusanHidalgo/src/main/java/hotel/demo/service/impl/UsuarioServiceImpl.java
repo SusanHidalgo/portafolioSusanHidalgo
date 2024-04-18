@@ -1,21 +1,25 @@
 package hotel.demo.service.impl;
 
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import hotel.demo.dao.RolDao;
 import hotel.demo.dao.UsuarioDao;
 import hotel.demo.domain.Rol;
 import hotel.demo.domain.Usuario;
 import hotel.demo.service.UsuarioService;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import jakarta.persistence.EntityManager;
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService {
+public abstract class UsuarioServiceImpl implements UsuarioService{
+
     @Autowired
     private UsuarioDao usuarioDao;
     @Autowired
     private RolDao rolDao;
+    
+     private EntityManager entityManager;
 
     @Override
     @Transactional(readOnly = true)
@@ -53,21 +57,30 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarioDao.existsByUsernameOrCorreo(username, correo);
     }
 
-   @Override
     @Transactional
-    public void save(Usuario usuario, boolean crearRolUser) {
+    public void save(Usuario usuario, int i) {
+        usuario.setActivo(1);
         usuario=usuarioDao.save(usuario);
-        if (crearRolUser) {  //Si se está creando el usuario, se crea el rol por defecto "USER"
-            Rol rol = new Rol();
-            rol.setNombre("ROLE_USER");
-            
-            rol.setIdUsuario(usuario.getIdUsuario().toString()); //Conversion Long to String
-            rolDao.save(rol);
-        }
+        
     }
+
     @Override
     @Transactional
     public void delete(Usuario usuario) {
         usuarioDao.delete(usuario);
     }
+
+    @Override
+    public void save2(Usuario usuario, int i) {
+        usuario.setActivo(1);
+        usuario=usuarioDao.save(usuario);
+        Long idUsuario = usuario.getIdUsuario(); 
+        if (i == 1 && idUsuario != null) { 
+        Rol rol = new Rol();
+        rol.setNombre("ROLE_USER");
+        rol.setIdUsuario(idUsuario);
+        rolDao.save(rol); 
+        }
+    }
+  
 }

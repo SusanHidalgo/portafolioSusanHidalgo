@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import hotel.demo.domain.Usuario;
-import caso.demo.service.RegistroService;
-import hotel.demo.service.
+import hotel.demo.service.RegistroService;
 @Controller
 @Slf4j
 @RequestMapping("/registro")

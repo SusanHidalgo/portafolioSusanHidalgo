@@ -10,19 +10,18 @@ import hotel.demo.service.HotelesService;
 
 
 @Service
-public class HotelesServiceImpl implements HotelesService {
+public abstract class HotelesServiceImpl implements HotelesService {
     @Autowired
     private HotelesDao hotelDao;
     
     
     @Transactional(readOnly=true)
-    @Override
     public List<Hoteles> getHoteles() {
         var lista=hotelDao.findAll();
         return lista;
     }
 
-     @Override
+
     @Transactional(readOnly = true)
     public Hoteles getHotel(Hoteles hotel) {
         return hotelDao.findById(hotel.getId()).orElse(null);
